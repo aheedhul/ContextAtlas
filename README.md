@@ -111,4 +111,4 @@ ContextAtlas/
 - Expose reranker scores and retrieved page labels in the frontend response view.
 - Package the API and frontend behind a single ASGI deployment for easier hosting.
 
-This project is built end-to-end by a single contributor and is not affiliated with any hackathon or organization. Use it for any domain.
+This project is built end-to-end by a team and is not affiliated with any hackathon or organization.
