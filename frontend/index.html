@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContextAtlas RAG Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="background-gradient"></div>
+    <div class="app-shell">
+        <main class="layout" role="main">
+            <section class="results-panel" aria-live="polite">
+                <div class="results-header">
+                    <div>
+                        <p class="panel-label">Latest Response</p>
+                        <p class="timestamp" id="responseTime">Awaiting first query...</p>
+                    </div>
+                    <div class="header-actions">
+                        <div class="status-chip" id="connectionState" role="status" aria-live="polite">
+                            <span class="pulse"></span>
+                            <span>Initializing...</span>
+                        </div>
+                        <span class="chip">Top K: <strong id="chipTopK">3</strong></span>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <article class="card answer-card" id="answerCard">
+                        <header>
+                            <h2>✅ Synthesized Answer</h2>
+                            <p class="subtitle">Concise, citation-backed output.</p>
+                        </header>
+                        <div class="answer-body" id="answerContent">
+                            <p class="placeholder">Submit a clinical question to generate a grounded answer with citations.</p>
+                        </div>
+                    </article>
+
+                    <aside class="card evidence-card" id="evidenceCard">
+                        <header>
+                            <h2>🔍 Contexts Used (Top K)</h2>
+                            <p class="subtitle">Evidence retrieved from your indexed corpus.</p>
+                        </header>
+                        <div class="contexts" id="contextsList">
+                            <div class="placeholder warning" role="alert">
+                                <strong>No contexts yet.</strong>
+                                <p>The supporting paragraphs will appear here after your first query.</p>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="control-dock" role="contentinfo">
+        <form id="queryForm" class="control-form">
+            <label class="visually-hidden" for="queryInput">Your query</label>
+            <textarea id="queryInput" name="query" rows="2" placeholder="Ask a question about your documents..." required></textarea>
+
+            <div class="control-row">
+                <div class="slider-group">
+                    <label for="topKSlider">Top K chunks</label>
+                    <div class="slider-meta">
+                        <input type="range" id="topKSlider" name="topK" min="1" max="7" value="3">
+                        <span class="slider-value" id="topKValue">3</span>
+                    </div>
+                </div>
+                <div class="button-group">
+                    <button type="button" class="ghost" id="clearButton">Clear</button>
+                    <button type="submit" class="primary" id="submitButton">
+                        <span class="label">Generate Answer</span>
+                        <span class="spinner" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </footer>
+
+    <template id="contextTemplate">
+        <article class="context-snippet">
+            <header>
+                <span class="snippet-badge"></span>
+                <span class="snippet-page"></span>
+            </header>
+            <p class="snippet-text"></p>
+        </article>
+    </template>
+
+    <div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+    <script src="./app.js" type="module"></script>
+</body>
+</html>
