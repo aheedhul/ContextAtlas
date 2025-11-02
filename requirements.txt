@@ -1,0 +1,22 @@
+fastapi
+uvicorn[standard]
+
+# --- Pin Core and compatible integrations around v0.13.x ---
+llama-index-core==0.13.5
+llama-index-llms-google-genai==0.3.1       # Requires core >=0.13.0
+llama-index-embeddings-huggingface==0.6.1  # Requires core >=0.13.0
+
+# --- Keep other needed packages/pins ---
+llama-index-vector-stores-chroma           # Let this align with core
+llama-index-readers-file                   # Let this align with core
+FlagEmbedding>=1.0.0
+chromadb
+google-generativeai
+numpy==1.26.4
+sentence-transformers                      # Keep unpinned
+transformers                               # Keep unpinned
+torch                                      # Keep unpinned
+accelerate
+pydantic                                   # Keep unpinned
+pymupdf
+spacy
